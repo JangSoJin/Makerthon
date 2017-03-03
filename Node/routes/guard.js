@@ -1,38 +1,22 @@
 var express = require('express');
 var router = express.Router();
 
-/*
-var firebase = require('firebase');
-var admin = require('firebase-admin');
-
-var db = firebase.database();
-*/
-
-/* GET users listing. */
 router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
 
 router.post('/register', function(req, res) {
-    var uid = req.body.uid;
-    //db.ref(uid).child('gaurd').once('value', function(snapshot) {
-    //    var data = snapshot.val();
-    //});
+    var email = req.body.email;
     var guard = req.body.guard; // email
-    admin.getUserByEmail(guard)
-        .then(function(userRecord) {
-            var gid = userRecord.uid;
-            db.ref(uid).child('guard').set(gid)
-                .then(function() {
-                    res.json({result:true});
-                })
-                .catch(function(error) {
 
-                });
-        })
-        .catch(function(error) {
-
-        });
+    req.cache.get(guard, function(error, reply) {
+        if (reply) {
+            req.cache.set(email+'-guard', guard);
+            res.json({ reply: reply });
+        } else {
+            res.json({ error: error, message: "Guardian not found." });
+        }
+    });
 });
 
 module.exports = router;

@@ -1,16 +1,26 @@
 var express = require('express');
 var router = express.Router();
 
-//var firebase = require('firebase');
-//var admin = require('firebase-admin');
+router.get('/:email', function(req, res) {
+    //var uid = req.params.uid;
+    var email = req.params.email;
 
-//var db = firebase.database();
+    req.cache.get(email+'-uid', function(error, reply) {
+        var uid = reply;
+        console.log('reply:', reply);
 
-router.get('/:uid', function(req, res) {
-    var uid = req.params.uid;
-
-    console.log('uid:', uid);
-
+        req.cache.hgetall(uid, function(error, reply) {
+            if (error) {
+                console.log('error:', error);
+                res.json({
+                    reply: reply,
+                    error: error
+                })
+            }
+            res.json({ reply: reply });
+        });
+    });
+    /*
     req.cache.hgetall(uid, function(error, reply) {
         if (error) {
             console.log('error:', error);
@@ -21,6 +31,7 @@ router.get('/:uid', function(req, res) {
         }
         res.json({ reply: reply });
     });
+    */
 });
 
 router.post('/', function(req, res) {

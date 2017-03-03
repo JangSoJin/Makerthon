@@ -3,6 +3,19 @@ var router = express.Router();
 var uuidV1 = require('uuid/v1');
 var async = require('async');
 
+var getUser = function(email, password) {
+    req.cache.get(email, function(error, reply) {
+        if (reply == 'OK') {
+            req.cache.get(email+'-password', function(error, reply) {
+                console.log('password:', reply);
+                res.json({ reply: reply });
+            });
+        } else {
+            res.json({ error: error });
+        }
+    });
+};
+
 //var crypto = require('crypto');
 //var salt = 'a3wn83)#Y{B{Tsy4b;n8-bj';
 //var hash = crypto.createHmac('sha256', salt);
