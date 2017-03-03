@@ -3,10 +3,13 @@ package com.example.sojinjang.makerthon;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
@@ -27,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothSocket btSocket = null;
     private StringBuilder sb = new StringBuilder();
     private ConnectedThread mConnectedThread = null;
-
 
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
@@ -51,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
                             String sbprint = sb.substring(0, endOfLineIndex);
                             sb.delete(0, sb.length());
                             txtArduino.setText(sbprint);
+                            int sensor_data = Integer.parseInt(sbprint);
+                            if(sensor_data >= 40){
+                                AlertDialog dialog = createDialogBox();
+                                dialog.getWindow().setBackgroundDrawableResource(android.R.color.holo_red_dark);
+                                dialog.show();
+                            }
 
 
                         }
@@ -63,6 +71,31 @@ public class MainActivity extends AppCompatActivity {
         checkBTState();
     }
 
+    public AlertDialog createDialogBox(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Warning!");
+        builder.setMessage("음주 경고");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setPositiveButton("가까운 쉼터찾기", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.search.naver.com/search.naver?sm=mtb_hty.top&where=m&oquery=근처+휴게소&tab=&query=근처+휴게소"));
+                startActivity(intent);
+            }
+        });
+
+        builder.setNegativeButton("종료", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(),"종료 버튼이 눌렸습니다.",Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        return dialog;
+    }
 
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
         if(Build.VERSION.SDK_INT >= 10){

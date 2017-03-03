@@ -17,6 +17,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="147dp"
         android:id="@+id/txtArduino"
-        android:textSize="100dp"
-        android:text="hi" />
+        android:textSize="100dp" />
 </RelativeLayout>
