@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Makerthon.iml" filepath="$PROJECT_DIR$/Makerthon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Makerthon_android.iml" filepath="$PROJECT_DIR$/Makerthon_android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
