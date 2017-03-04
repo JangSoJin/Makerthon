@@ -49,35 +49,6 @@ public class RegistActivity extends AppCompatActivity {
         btnDone = (Button) findViewById(R.id.btnDone);
         btnCancel = (Button) findViewById(R.id.btnCancel);
 
-        // 비밀번호 일치 검사
-        etPasswordConfirm.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String password = etPassword.getText().toString();
-                String confirm = etPasswordConfirm.getText().toString();
-
-                if( password.equals(confirm) ) {
-                    etPassword.setBackgroundColor(Color.GREEN);
-                    etPasswordConfirm.setBackgroundColor(Color.GREEN);
-                } else {
-                    etPassword.setBackgroundColor(Color.RED);
-                    etPasswordConfirm.setBackgroundColor(Color.RED);
-                }
-            }
-
-
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
 
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override

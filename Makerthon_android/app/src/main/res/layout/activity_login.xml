@@ -36,4 +36,16 @@
         android:text="PASSWORD"
         android:textSize="36sp" />
 
+    <Button
+        android:text="Login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Login" />
+
+    <Button
+        android:text="Regist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Regist" />
+
 </LinearLayout>

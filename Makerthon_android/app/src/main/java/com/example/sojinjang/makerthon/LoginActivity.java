@@ -15,24 +15,17 @@ public class LoginActivity extends AppCompatActivity {
 
     Button login;
     Button regist;
-    ImageButton kakao;
-    ImageButton facebook;
     private RelativeLayout mlayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mlayout = (RelativeLayout) findViewById(R.id.activity_main);
-        mlayout.setBackgroundColor(Color.rgb(148,210,238));
-
         login = (Button) findViewById(R.id.Login);
         regist = (Button) findViewById(R.id.Regist);
         login.setBackgroundColor(Color.rgb(-215,109,156));
         regist.setBackgroundColor(Color.rgb(-215,109,156));
 
-        kakao.setBackgroundColor(Color.rgb(148,210,238));
-        facebook.setBackgroundColor(Color.rgb(148,210,238));
 
         regist.setOnClickListener(new View.OnClickListener() {
             @Override
